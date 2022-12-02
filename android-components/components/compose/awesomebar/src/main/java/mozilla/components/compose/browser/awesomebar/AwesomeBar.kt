@@ -4,6 +4,7 @@
 
 package mozilla.components.compose.browser.awesomebar
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -74,6 +75,7 @@ fun AwesomeBar(
  * @param onAutoComplete Gets invoked when the user clicks on the "autocomplete" icon of a suggestion.
  * @param onScroll Gets invoked at the beginning of the user performing a scroll gesture.
  */
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun AwesomeBar(
     text: String,
