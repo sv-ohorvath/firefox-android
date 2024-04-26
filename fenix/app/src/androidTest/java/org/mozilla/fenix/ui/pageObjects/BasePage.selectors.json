@@ -1,0 +1,18 @@
+{
+  "privateBrowsingButton": {
+    "selectorData": ["$packageName:id/privateBrowsingButton", "Disable private browsing" ],
+    "strategy": "UIAutomator",
+    "groups": [
+      "requiredForPage",
+      "privateBrowsing"
+    ]
+  },
+
+  "toolbar": {
+    "selectorData": "R.id.toolbar",
+    "strategy": "Espresso",
+    "groups": [
+      "requiredForPage"
+    ]
+  }
+}

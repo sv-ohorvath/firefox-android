@@ -19,6 +19,32 @@ import org.mozilla.fenix.helpers.TestHelper.mDevice
  */
 object MatcherHelper {
 
+
+    // higher order function that takes a function as a parameter and returns a function
+    // wraps the assertions of UIObjects existence and logging
+    fun withLoggingAndExistenceCheck(action: (UiObject) -> Unit): (UiObject) -> Unit {
+        return { uiObject ->
+            Log.i(TAG, "Performing action on: ${uiObject.selector}")
+            assertTrue("${uiObject.selector} does not exist", uiObject.waitForExists(waitingTime))
+            action(uiObject)
+            Log.i(TAG, "Action performed on: ${uiObject.selector}")
+        }
+    }
+
+    //use this function to create new functions that perform specific actions, like checking if a UiObject is enabled and visible:
+    val assertItemIsEnabledAndVisible = withLoggingAndExistenceCheck { uiObject ->
+        assertTrue(uiObject.isEnabled)
+    }
+
+    //use this function to create new functions that perform specific actions, like finding a UiObject with a specific resource id or containing a specific text:
+    val itemWithResId = withLoggingAndExistenceCheck { uiSelector ->
+        mDevice.findObject(uiSelector)
+    }
+
+    val itemContainingText = withLoggingAndExistenceCheck { uiSelector ->
+        mDevice.findObject(uiSelector)
+    }
+
     fun itemWithResId(resourceId: String): UiObject {
         Log.i(TAG, "Looking for item with resource id: $resourceId")
         return mDevice.findObject(UiSelector().resourceId(resourceId))
